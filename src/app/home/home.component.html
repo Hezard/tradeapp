@@ -1,0 +1,86 @@
+<div class="py-4 text-right">
+  <button class="btn btn-danger" (click)="resetOrders()">Reset</button>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        Buy orders
+      </div>
+      <ul class="list-group list-group-flush is-scrollable">
+        <li class="list-group-item py-1 small" @items *ngFor="let item of orderList.buyers | slice:-20">
+          <b class="text-muted">id:</b> {{item.id}},
+          <b class="text-muted">Qty:</b> {{item.quantity}},
+          <b class="text-muted">Price:</b> {{item.price | currency}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        Sell orders
+      </div>
+      <ul class="list-group list-group-flush is-scrollable">
+        <li class="list-group-item py-1 small" @items *ngFor="let item of orderList.sellers | slice:-20">
+          <b class="text-muted">id:</b> {{item.id}},
+          <b class="text-muted">Qty:</b> {{item.quantity}},
+          <b class="text-muted">Price:</b> {{item.price | currency}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6 offset-3 my-4">
+    <div class="card card--matches">
+      <div class="card-header">
+        Matched orders
+      </div>
+      <ul class="list-group list-group-flush is-scrollable">
+        <li class="list-group-item py-1 small"
+          @items
+          *ngFor="let item of orderList.matches | slice:0:30;"
+          (click)="selectRow(item.date)">
+          {{ item.date | date: 'mediumTime' }},
+          <b class="text-muted">Volume:</b> {{ item.volume }},
+          <b class="text-muted">Price:</b> {{ item.price | currency}}
+          <div class="bg-light border my-2 p-2 small" [hidden]="selectedOrder !== item.date">
+            <div class="row">
+              <div class="col">
+                <b class="text-muted">id:</b> {{item.buyOrder.id}}
+              </div>
+              <div class="col">
+                <b class="text-muted">Type:</b> {{item.buyOrder.type}}
+              </div>
+              <div class="col">
+                <b class="text-muted">Qty:</b> {{item.buyOrder.quantity}}
+              </div>
+              <div class="col">
+                <b class="text-muted">Price:</b> {{item.buyOrder.price | currency}}
+              </div>
+            </div>
+            <hr class="my-1" />
+            <div class="row">
+              <div class="col">
+                <b class="text-muted">id:</b> {{item.sellOrder.id}}
+              </div>
+              <div class="col">
+                <b class="text-muted">Type:</b> {{item.sellOrder.type}}
+              </div>
+              <div class="col">
+                <b class="text-muted">Qty:</b> {{item.sellOrder.quantity}}
+              </div>
+              <div class="col">
+                <b class="text-muted">Price:</b> {{item.sellOrder.price | currency}}
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+

@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+@import "styles/vars";
+@import "styles/mixins";
+
+@import "~bootstrap/scss/bootstrap";
+
+
+@include scrollbars(.25rem, $gray-500);
+
+.is-scrollable {
+  height: 225px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.card--matches {
+  .list-group-item {
+    cursor: pointer;
+  }
+}
+
+.list-group {
+  .list-group-item {
+    border-bottom: 1px solid $border-color;
+    border-top: none;
+    margin: 0;
+  }
+}
